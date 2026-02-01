@@ -9,18 +9,19 @@ const {
 
 const postRouter = express.Router();
 // Creating post
-postRouter.post("/", createPost);
+postRouter
+  .post("/", createPost)
 
-// Getting all posts
-postRouter.get("/posts", getAllPost);
+  // Getting all posts
+  .get("/posts", getAllPost)
 
-// Get post by Id
-postRouter.get("/post/:id", getPostByID);
+  // Get post by Id
+  .get("/post/:id", getPostByID)
 
-// Update a post by id
-postRouter.put("/post/:id", updatePostByID);
+  // Update a post by id
+  .put("/post/:id", updatePostByID)
 
-// Delete post by ID
-postRouter.delete("/post/:id", deletePostByID);
+  // Delete post by ID
+  .delete("/post/:id", deletePostByID);
 
 module.exports = postRouter;

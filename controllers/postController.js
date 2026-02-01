@@ -10,7 +10,7 @@ const createPost = async (req, res) => {
         .json({ message: "All fields are required!!! Try again" });
     } else {
       const post = new postModel({ title, desc, topic });
-      return await post.save();
+      await post.save();
       res.status(200).json({ message: post });
     }
   } catch (error) {
