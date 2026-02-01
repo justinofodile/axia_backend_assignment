@@ -7,7 +7,7 @@ const createPost = async (req, res) => {
     if (!title || !desc || !topic) {
       return res
         .status(201)
-        .json({ message: "Unable to make a post!!! Try again" });
+        .json({ message: "All fields are required!!! Try again" });
     } else {
       const post = new postModel({ title, desc, topic });
       return await post.save();
