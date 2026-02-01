@@ -4,14 +4,15 @@ const postModel = require("../model/postModel");
 const createPost = async (req, res) => {
   try {
     const { title, desc, topic } = req.body;
-    const post = new postModel({ title, desc, topic });
-
-    await post.save();
-    if (!post)
+    if (!title || !desc || !topic) {
       return res
         .status(201)
         .json({ message: "Unable to make a post!!! Try again" });
-    res.status(200).json({ message: post });
+    } else {
+      const post = new postModel({ title, desc, topic });
+      return await post.save();
+      res.status(200).json({ message: post });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
