@@ -4,12 +4,19 @@ const postModel = require("../model/postModel");
 const createPost = async (req, res) => {
   try {
     const { title, desc, topic } = req.body;
+
+    const userId = req.params.id;
+    if (!userId) {
+      res.status(400).json({ message: "Please login to continue!!!!" });
+      return;
+    }
+
     if (!title || !desc || !topic) {
       return res
         .status(201)
         .json({ message: "All fields are required!!! Try again" });
     } else {
-      const post = new postModel({ title, desc, topic });
+      const post = new postModel({ ...req.body, userId });
       await post.save();
       res.status(200).json({ message: post });
     }
@@ -21,7 +28,7 @@ const createPost = async (req, res) => {
 // Controller to get all post
 const getAllPost = async (req, res) => {
   try {
-    const post = await postModel.find();
+    const post = await postModel.find().populate("userId", "-password");
     if (!post)
       return res
         .status(201)

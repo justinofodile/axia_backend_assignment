@@ -10,7 +10,7 @@ const {
 const postRouter = express.Router();
 // Creating post
 postRouter
-  .post("/", createPost)
+  .post("/:id", createPost)
 
   // Getting all posts
   .get("/posts", getAllPost)

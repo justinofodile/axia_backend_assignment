@@ -3,13 +3,20 @@ const userModel = require("../model/userModel");
 // Controller to create user
 const createUser = async (req, res) => {
   try {
-    const { name, email, gender, marital_status } = req.body;
-    if (!name || !email || !gender || !marital_status) {
+    const { name, email, gender, marital_status, password } = req.body;
+    if (!name || !email || !gender || !marital_status || !password) {
+      // console.log(req.body);
       return res
-        .status(201)
+        .status(400)
         .json({ message: "All fields are required!!! Try again" });
     } else {
-      const user = new userModel({ name, email, gender, marital_status });
+      const user = new userModel({
+        name,
+        email,
+        gender,
+        marital_status,
+        password,
+      });
       await user.save();
       res.status(200).json({ message: user });
     }
