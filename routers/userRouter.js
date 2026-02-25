@@ -13,15 +13,15 @@ userRouter
   .post("/register", createUser)
 
   // Getting all posts
-  .get("/users", getAllUser)
+  .get("/", getAllUser)
 
   // Get post by Id
-  .get("/user/:id", getUserByID)
+  .get("/:id", getUserByID)
 
   // Update a post by id
-  .put("/user/:id", updateUserByID)
+  .put("/:id", updateUserByID)
 
   // Delete post by ID
-  .delete("/user/:id", deleteUserByID);
+  .delete("/:id", deleteUserByID);
 
 module.exports = userRouter;

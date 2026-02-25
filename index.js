@@ -13,8 +13,8 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/", postRouter);
-app.use("/api/", userRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/users", userRouter);
 
 app.listen(port, () => {
   console.log(`Server Listening on port ${port}`);

@@ -13,15 +13,15 @@ postRouter
   .post("/:id", createPost)
 
   // Getting all posts
-  .get("/posts", getAllPost)
+  .get("/", getAllPost)
 
   // Get post by Id
-  .get("/post/:id", getPostByID)
+  .get("/:id", getPostByID)
 
   // Update a post by id
-  .put("/post/:id", updatePostByID)
+  .put("/:id", updatePostByID)
 
   // Delete post by ID
-  .delete("/post/:id", deletePostByID);
+  .delete("/:id", deletePostByID);
 
 module.exports = postRouter;

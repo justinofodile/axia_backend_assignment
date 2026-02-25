@@ -1,24 +1,31 @@
 const userModel = require("../model/userModel");
+const bcrypt = require("bcrypt");
 
 // Controller to create user
 const createUser = async (req, res) => {
   try {
     const { name, email, gender, marital_status, password } = req.body;
     if (!name || !email || !gender || !marital_status || !password) {
-      // console.log(req.body);
       return res
         .status(400)
         .json({ message: "All fields are required!!! Try again" });
     } else {
-      const user = new userModel({
+      const user = await userModel.findOne({ email });
+      if (user) {
+        return res.status(400).json({ message: "User already exist" });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new userModel({
         name,
         email,
         gender,
         marital_status,
-        password,
+        password: hashedPassword,
       });
-      await user.save();
-      res.status(200).json({ message: user });
+      await newUser.save();
+      res
+        .status(201)
+        .json({ message: "user created successfully!!!!", data: newUser });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
